@@ -1,0 +1,64 @@
+/* index.css - Default styles for React + Vite */
+
+/* 1. CSS Reset / Normalize */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Root variables for easy theming */
+:root {
+  --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-size-base: 16px;
+  --color-bg: #ffffff;
+  --color-text: #213547;
+  --color-primary: #646cff;
+  --color-primary-hover: #535bf2;
+  --line-height: 1.5;
+}
+
+/* 3. Base styles */
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 4. Anchor styles */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* 5. App container */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* 6. Utility classes */
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+button:hover {
+  background-color: var(--color-primary-hover);
+}
