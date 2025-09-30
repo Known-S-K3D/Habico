@@ -15,3 +15,9 @@ In Backend missing dependencies. Add vendor to make it work.
 Run the server by executing this command.
 
     php artisan serve
+
+if you see .env.example. only execute this command to have .env
+    
+    copy .env.example .env
+
+
