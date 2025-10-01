@@ -29,36 +29,36 @@ class ProductSeeder extends Seeder
                 'price' => 1500.00,
                 'image' => 'product/InabelProducts/inabel-table-runner.jpg'
             ],
-            [
-                'name' => 'Inabel Tote Bag',
-                'description' => 'The Inabel Tote Bag is a beautiful fusion of traditional artistry and modern practicality. Made from handwoven cotton using centuries-old weaving techniques, this tote showcases the vibrant spirit and meticulous craftsmanship of Ilocano weavers. Historically, woven textiles were symbols of wealth and prestige — today, they continue that legacy as functional art you can carry anywhere. Spacious, durable, and stylish, the Inabel Tote celebrates cultural heritage while supporting sustainable fashion.',
-                'price' => 1600.00,
-                'image' => 'product/InabelProducts/inabel-tote.jpg'
-            ],
-            [
-                'name' => 'Inabel Kimona',
-                'description' => 'Once worn during local festivities and ceremonial gatherings, the Inabel Kimona blends traditional elegance with contemporary fashion. Its lightweight handwoven fabric breathes life into every movement, while its delicate patterns honor the stories of the past. Each kimona is a collaboration between weaver and wearer — a garment that embodies grace, strength, and cultural pride. Whether paired with modern pieces or traditional attire, it stands as a timeless expression of Filipino heritage.',
-                'price' => 2800.00,
-                'image' => 'product/InabelProducts/inabel-kimona.jpg'
-            ],
-            [
-                'name' => 'Inabel Coin Purse',
-                'description' => 'Don’t be fooled by its size — the Inabel Coin Purse is a small but mighty symbol of Ilocano artistry. Meticulously handwoven on traditional looms, it carries motifs inspired by nature and community life. Historically, woven purses like this were used to store betel nuts, coins, or small charms believed to bring luck. Today, it’s a practical accessory with a story, perfect for carrying your essentials while carrying forward a legacy.',
-                'price' => 300.00,
-                'image' => 'product/InabelProducts/inabel-coin-purse.jpg'
-            ],
-            [
-                'name' => 'Inabel Dress (Modern Fusion)',
-                'description' => 'The Inabel Dress represents the evolution of tradition into contemporary fashion. Once reserved for special occasions, Inabel textiles are now reimagined by designers who respect the past while embracing the present. Every thread woven into this dress reflects generations of craftsmanship, with motifs that symbolize prosperity, community, and nature’s harmony. Lightweight yet durable, elegant yet understated — it’s a piece of wearable heritage that transcends time.',
-                'price' => 4200.00,
-                'image' => 'product/InabelProducts/inabel-dress.jpg'
-            ],
-            [
-                'name' => 'Inabel Apron',
-                'description' => 'Originally worn by Ilocano women during cooking, farming, and festivities, the Inabel Apron is a garment of resilience and purpose. Each piece is handwoven using age-old techniques, showcasing patterns that reflect daily life, fertility, and strength. Beyond its function, it represents the hardworking spirit and enduring creativity of Filipino women. Today, it blends practicality with heritage — perfect for the modern kitchen, artisan studio, or creative workspace.',
-                'price' => 1200.00,
-                'image' => 'product/InabelProducts/inabel-apron.jpg'
-            ],
+            // [
+            //     'name' => 'Inabel Tote Bag',
+            //     'description' => 'The Inabel Tote Bag is a beautiful fusion of traditional artistry and modern practicality. Made from handwoven cotton using centuries-old weaving techniques, this tote showcases the vibrant spirit and meticulous craftsmanship of Ilocano weavers. Historically, woven textiles were symbols of wealth and prestige — today, they continue that legacy as functional art you can carry anywhere. Spacious, durable, and stylish, the Inabel Tote celebrates cultural heritage while supporting sustainable fashion.',
+            //     'price' => 1600.00,
+            //     'image' => 'product/InabelProducts/inabel-tote.jpg'
+            // ],
+            // [
+            //     'name' => 'Inabel Kimona',
+            //     'description' => 'Once worn during local festivities and ceremonial gatherings, the Inabel Kimona blends traditional elegance with contemporary fashion. Its lightweight handwoven fabric breathes life into every movement, while its delicate patterns honor the stories of the past. Each kimona is a collaboration between weaver and wearer — a garment that embodies grace, strength, and cultural pride. Whether paired with modern pieces or traditional attire, it stands as a timeless expression of Filipino heritage.',
+            //     'price' => 2800.00,
+            //     'image' => 'product/InabelProducts/inabel-kimona.jpg'
+            // ],
+            // [
+            //     'name' => 'Inabel Coin Purse',
+            //     'description' => 'Don’t be fooled by its size — the Inabel Coin Purse is a small but mighty symbol of Ilocano artistry. Meticulously handwoven on traditional looms, it carries motifs inspired by nature and community life. Historically, woven purses like this were used to store betel nuts, coins, or small charms believed to bring luck. Today, it’s a practical accessory with a story, perfect for carrying your essentials while carrying forward a legacy.',
+            //     'price' => 300.00,
+            //     'image' => 'product/InabelProducts/inabel-coin-purse.jpg'
+            // ],
+            // [
+            //     'name' => 'Inabel Dress (Modern Fusion)',
+            //     'description' => 'The Inabel Dress represents the evolution of tradition into contemporary fashion. Once reserved for special occasions, Inabel textiles are now reimagined by designers who respect the past while embracing the present. Every thread woven into this dress reflects generations of craftsmanship, with motifs that symbolize prosperity, community, and nature’s harmony. Lightweight yet durable, elegant yet understated — it’s a piece of wearable heritage that transcends time.',
+            //     'price' => 4200.00,
+            //     'image' => 'product/InabelProducts/inabel-dress.jpg'
+            // ],
+            // [
+            //     'name' => 'Inabel Apron',
+            //     'description' => 'Originally worn by Ilocano women during cooking, farming, and festivities, the Inabel Apron is a garment of resilience and purpose. Each piece is handwoven using age-old techniques, showcasing patterns that reflect daily life, fertility, and strength. Beyond its function, it represents the hardworking spirit and enduring creativity of Filipino women. Today, it blends practicality with heritage — perfect for the modern kitchen, artisan studio, or creative workspace.',
+            //     'price' => 1200.00,
+            //     'image' => 'product/InabelProducts/inabel-apron.jpg'
+            // ],
         ];
 
         foreach ($inabelProducts as $product) {
@@ -88,42 +88,42 @@ class ProductSeeder extends Seeder
                 'price' => 6000.00,
                 'image' => 'product/IkatProducts/kimono.jpg'
             ],
-            [
-                'name' => 'Ikat Cushion Covers',
-                'description' => 'Ikat Cushion Covers infuse any space with color, movement, and cultural depth. Inspired by the dances, rituals, and landscapes of indigenous communities, these handwoven pieces reflect centuries-old dyeing traditions. Their vivid motifs and soft cotton texture bring warmth and authenticity to your home, turning everyday living spaces into meaningful reflections of heritage.',
-                'price' => 1200.00,
-                'image' => 'product/IkatProducts/ikat-cushion.jpg'
-            ],
-            [
-                'name' => 'Ikat Shawl',
-                'description' => 'Traditionally worn during ceremonies and rites of passage, the Ikat Shawl carries motifs that mirror the universe — stars, rivers, and life cycles. Its soft, handwoven texture and distinctive dye patterns are the result of patience and precision, with each piece taking weeks to complete. Whether draped over the shoulders or displayed as textile art, it is a piece that speaks of identity, ancestry, and artistry.',
-                'price' => 2000.00,
-                'image' => 'product/IkatProducts/ikat-shawl.jpg'
-            ],
-            [
-                'name' => 'Ikat Sling Bag',
-                'description' => 'Historically crafted for travelers and traders, the Ikat Sling Bag is a companion woven with intention and meaning. Its durable weave and striking patterns speak of journeys, exchanges, and shared stories. Today, it’s the perfect balance of function and tradition — a bag that carries not just essentials but centuries of cultural narrative.',
-                'price' => 1600.00,
-                'image' => 'product/IkatProducts/ikat-sling-bag.jpg'
-            ],
-            [
-                'name' => 'Ikat Skirt (Tapis)',
-                'description' => 'The Ikat Tapis is more than a garment — it is a living symbol of womanhood, ceremony, and cultural continuity. Its wave-like patterns, achieved through meticulous pre-dyeing techniques, mirror the ebb and flow of life. Often worn during rituals and important gatherings, it honors both nature’s rhythm and the weaver’s artistry, making it a treasured piece in any collection.',
-                'price' => 3200.00,
-                'image' => 'product/IkatProducts/ikat-skirt.jpg'
-            ],
-            [
-                'name' => 'Ikat Curtains',
-                'description' => 'Sunlight filtering through Ikat Curtains is like light passing through history itself. These handwoven pieces were once reserved for ceremonial homes and sacred spaces, believed to invite blessings and balance. Their ethereal patterns and natural dyes now elevate modern interiors with warmth, culture, and timeless beauty.',
-                'price' => 2500.00,
-                'image' => 'product/IkatProducts/ikat-curtains.jpg'
-            ],
-            [
-                'name' => 'Ikat Belt (Sash)',
-                'description' => 'Worn around the waist during rituals, the Ikat Sash symbolized unity, strength, and readiness. Every dyed thread was tied with intention, carrying prayers and protection for its wearer. Today, it remains a versatile accessory that celebrates this deep heritage — a bridge between ceremonial tradition and everyday fashion.',
-                'price' => 900.00,
-                'image' => 'product/IkatProducts/ikat-belt.jpg'
-            ],
+            // [
+            //     'name' => 'Ikat Cushion Covers',
+            //     'description' => 'Ikat Cushion Covers infuse any space with color, movement, and cultural depth. Inspired by the dances, rituals, and landscapes of indigenous communities, these handwoven pieces reflect centuries-old dyeing traditions. Their vivid motifs and soft cotton texture bring warmth and authenticity to your home, turning everyday living spaces into meaningful reflections of heritage.',
+            //     'price' => 1200.00,
+            //     'image' => 'product/IkatProducts/ikat-cushion.jpg'
+            // ],
+            // [
+            //     'name' => 'Ikat Shawl',
+            //     'description' => 'Traditionally worn during ceremonies and rites of passage, the Ikat Shawl carries motifs that mirror the universe — stars, rivers, and life cycles. Its soft, handwoven texture and distinctive dye patterns are the result of patience and precision, with each piece taking weeks to complete. Whether draped over the shoulders or displayed as textile art, it is a piece that speaks of identity, ancestry, and artistry.',
+            //     'price' => 2000.00,
+            //     'image' => 'product/IkatProducts/ikat-shawl.jpg'
+            // ],
+            // [
+            //     'name' => 'Ikat Sling Bag',
+            //     'description' => 'Historically crafted for travelers and traders, the Ikat Sling Bag is a companion woven with intention and meaning. Its durable weave and striking patterns speak of journeys, exchanges, and shared stories. Today, it’s the perfect balance of function and tradition — a bag that carries not just essentials but centuries of cultural narrative.',
+            //     'price' => 1600.00,
+            //     'image' => 'product/IkatProducts/ikat-sling-bag.jpg'
+            // ],
+            // [
+            //     'name' => 'Ikat Skirt (Tapis)',
+            //     'description' => 'The Ikat Tapis is more than a garment — it is a living symbol of womanhood, ceremony, and cultural continuity. Its wave-like patterns, achieved through meticulous pre-dyeing techniques, mirror the ebb and flow of life. Often worn during rituals and important gatherings, it honors both nature’s rhythm and the weaver’s artistry, making it a treasured piece in any collection.',
+            //     'price' => 3200.00,
+            //     'image' => 'product/IkatProducts/ikat-skirt.jpg'
+            // ],
+            // [
+            //     'name' => 'Ikat Curtains',
+            //     'description' => 'Sunlight filtering through Ikat Curtains is like light passing through history itself. These handwoven pieces were once reserved for ceremonial homes and sacred spaces, believed to invite blessings and balance. Their ethereal patterns and natural dyes now elevate modern interiors with warmth, culture, and timeless beauty.',
+            //     'price' => 2500.00,
+            //     'image' => 'product/IkatProducts/ikat-curtains.jpg'
+            // ],
+            // [
+            //     'name' => 'Ikat Belt (Sash)',
+            //     'description' => 'Worn around the waist during rituals, the Ikat Sash symbolized unity, strength, and readiness. Every dyed thread was tied with intention, carrying prayers and protection for its wearer. Today, it remains a versatile accessory that celebrates this deep heritage — a bridge between ceremonial tradition and everyday fashion.',
+            //     'price' => 900.00,
+            //     'image' => 'product/IkatProducts/ikat-belt.jpg'
+            // ],
         ];
 
         foreach ($ikatProducts as $product) {
@@ -153,36 +153,36 @@ class ProductSeeder extends Seeder
                 'price' => 4000.00,
                 'image' => 'product/KalingaProducts/kalinga-blanket.jpg'
             ],
-            [
-                'name' => 'Kalinga Bag',
-                'description' => 'Traditionally used to carry betel nut, rice, and ritual offerings, the Kalinga Bag is a companion woven with purpose. Its bold geometric motifs symbolize mountains, rivers, and the interconnectedness of all life. Today, it continues its journey as a meaningful everyday bag that honors both utility and artistry.',
-                'price' => 1800.00,
-                'image' => 'product/KalingaProducts/kalinga-bag.jpg'
-            ],
-            [
-                'name' => 'Kalinga Table Cloth',
-                'description' => 'Once spread during rituals and communal feasts, the Kalinga Table Cloth transforms any table into a space of connection and abundance. Its strong red-and-black patterns symbolize unity and strength, while the meticulous handweaving reflects the patience and skill of generations of artisans.',
-                'price' => 2500.00,
-                'image' => 'product/KalingaProducts/kalinga-table-cloth.jpg'
-            ],
-            [
-                'name' => 'Kalinga Vest',
-                'description' => 'Worn by warriors and respected elders, the Kalinga Vest is a garment of honor and courage. Its striking red threads signify bravery and sacrifice, while the patterns woven into the fabric carry ancestral blessings. Today, it stands as a wearable tribute to the strength and spirit of the Kalinga people.',
-                'price' => 3000.00,
-                'image' => 'product/KalingaProducts/kalinga-vest.jpg'
-            ],
-            [
-                'name' => 'Kalinga Coin Purse',
-                'description' => 'Tiny but deeply symbolic, the Kalinga Coin Purse embodies the meticulous craftsmanship and vibrant storytelling of its makers. Historically used to carry small charms or coins, it is a piece of everyday culture transformed into a functional and meaningful accessory.',
-                'price' => 500.00,
-                'image' => 'product/KalingaProducts/kalinga-coin-purse.jpg'
-            ],
-            [
-                'name' => 'Kalinga Bed Runner',
-                'description' => 'Placed at the foot of the bed as a sign of prosperity and welcome, the Kalinga Bed Runner infuses any room with cultural depth and warmth. Its bold, handwoven patterns echo the rhythm of traditional chants and the strength of ancestral roots, making it a meaningful accent piece in any home.',
-                'price' => 1800.00,
-                'image' => 'product/KalingaProducts/kalinga-bed-runner.jpg'
-            ],
+            // [
+            //     'name' => 'Kalinga Bag',
+            //     'description' => 'Traditionally used to carry betel nut, rice, and ritual offerings, the Kalinga Bag is a companion woven with purpose. Its bold geometric motifs symbolize mountains, rivers, and the interconnectedness of all life. Today, it continues its journey as a meaningful everyday bag that honors both utility and artistry.',
+            //     'price' => 1800.00,
+            //     'image' => 'product/KalingaProducts/kalinga-bag.jpg'
+            // ],
+            // [
+            //     'name' => 'Kalinga Table Cloth',
+            //     'description' => 'Once spread during rituals and communal feasts, the Kalinga Table Cloth transforms any table into a space of connection and abundance. Its strong red-and-black patterns symbolize unity and strength, while the meticulous handweaving reflects the patience and skill of generations of artisans.',
+            //     'price' => 2500.00,
+            //     'image' => 'product/KalingaProducts/kalinga-table-cloth.jpg'
+            // ],
+            // [
+            //     'name' => 'Kalinga Vest',
+            //     'description' => 'Worn by warriors and respected elders, the Kalinga Vest is a garment of honor and courage. Its striking red threads signify bravery and sacrifice, while the patterns woven into the fabric carry ancestral blessings. Today, it stands as a wearable tribute to the strength and spirit of the Kalinga people.',
+            //     'price' => 3000.00,
+            //     'image' => 'product/KalingaProducts/kalinga-vest.jpg'
+            // ],
+            // [
+            //     'name' => 'Kalinga Coin Purse',
+            //     'description' => 'Tiny but deeply symbolic, the Kalinga Coin Purse embodies the meticulous craftsmanship and vibrant storytelling of its makers. Historically used to carry small charms or coins, it is a piece of everyday culture transformed into a functional and meaningful accessory.',
+            //     'price' => 500.00,
+            //     'image' => 'product/KalingaProducts/kalinga-coin-purse.jpg'
+            // ],
+            // [
+            //     'name' => 'Kalinga Bed Runner',
+            //     'description' => 'Placed at the foot of the bed as a sign of prosperity and welcome, the Kalinga Bed Runner infuses any room with cultural depth and warmth. Its bold, handwoven patterns echo the rhythm of traditional chants and the strength of ancestral roots, making it a meaningful accent piece in any home.',
+            //     'price' => 1800.00,
+            //     'image' => 'product/KalingaProducts/kalinga-bed-runner.jpg'
+            // ],
         ];
 
         foreach ($kalingaProducts as $product) {

@@ -23,23 +23,8 @@ class DatabaseSeeder extends Seeder
 
 
          $this->call(ProductSeeder::class);
+         $this->call(UserSeeder::class);
 
-         // Create an admin
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password123'),
-            'role' => 'admin',
-        ]);
-
-        // Create a normal user
-        User::create([
-            'name' => 'Normal User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password123'),
-            'role' => 'user',
-        ]);
-
-        
+       
     }
 }

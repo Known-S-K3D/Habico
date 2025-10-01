@@ -38,9 +38,14 @@ const AdminHome = () => {
 
   const loadProducts = async () => {
     setLoading(true);
-    const data = await fetchProducts();
-    setProducts(data);
-    setLoading(false);
+    try {
+      const data = await fetchProducts();
+      setProducts(data);
+    } catch (e) {
+      console.error("Failed to fetch products:", e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleOpenForm = (product = null) => {
@@ -98,7 +103,13 @@ const AdminHome = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!form.name || !form.description || !form.category || !form.price || !form.stock) {
+    if (
+      !form.name ||
+      !form.description ||
+      !form.category ||
+      !form.price ||
+      !form.stock
+    ) {
       setError("All fields are required.");
       return;
     }
@@ -137,23 +148,26 @@ const AdminHome = () => {
     }
   };
 
-  const filteredProducts = products.filter(
-    (p) =>
-      (!filter || p.category === filter) &&
-      (!search ||
-        p.name.toLowerCase().includes(search.toLowerCase()) ||
-        p.description.toLowerCase().includes(search.toLowerCase()))
-  );
+  // ✅ Improved filtering logic
+  const filteredProducts = products.filter((p) => {
+    const matchesFilter = filter
+      ? p.category?.toLowerCase() === filter.toLowerCase()
+      : true;
+    const matchesSearch = search
+      ? p.name.toLowerCase().includes(search.toLowerCase()) ||
+        p.description.toLowerCase().includes(search.toLowerCase())
+      : true;
+    return matchesFilter && matchesSearch;
+  });
 
-  // DESIGNS/UI 
   return (
     <div className="admin-dashboard">
       {/* Header */}
       <header className="admin-header">
         <h1>Admin Dashboard</h1>
-      {/* Require to show the user.*/}
         {user && (
           <button className="admin-logout-btn" onClick={logout}>
+            
           </button>
         )}
       </header>
@@ -197,82 +211,95 @@ const AdminHome = () => {
               <th>Actions</th>
             </tr>
           </thead>
+
           <tbody>
-            {filteredProducts.length === 0 && (
+            {/* ✅ Show loading message instead of "No products found" */}
+            {loading ? (
+              <tr>
+                <td colSpan={6} style={{ textAlign: "center", color: "#888" }}>
+                  ⏳ Loading products, please wait...
+                </td>
+              </tr>
+            ) : filteredProducts.length === 0 ? (
               <tr>
                 <td colSpan={6} style={{ textAlign: "center", color: "#888" }}>
                   No products found.
                 </td>
               </tr>
-            )}
-            {filteredProducts.map((product) => (
-              <React.Fragment key={product.id}>
-                <tr
-                  className="admin-product-row"
-                  onClick={() =>
-                    setExpandedRow(expandedRow === product.id ? null : product.id)
-                  }
-                  style={{ cursor: "pointer" }}
-                >
-                  <td>
-                    <img
-                      src={
-                        product.image
-                          ? `http://localhost:8000/storage/${product.image}`
-                          : "https://via.placeholder.com/60"
-                      }
-                      alt={product.name}
-                      className="admin-product-img"
-                    />
-                  </td>
-                  <td>{product.name}</td>
-                  <td>{product.category}</td>
-                  <td>₱{product.price}</td>
-                  <td>{product.stock}</td>
-                  <td>
-                    <button
-                      className="admin-edit-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpenForm(product);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="admin-delete-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(product.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-
-                {expandedRow === product.id && (
-                  <tr className="admin-expandable-row">
-                    <td colSpan={6}>
-                      <div className="expandable-content">
-                        <p><strong>Description:</strong> {product.description}</p>
-                        <div className="expandable-image-wrapper">
-                          <img
-                            src={
-                              product.image
-                                ? `http://localhost:8000/storage/${product.image}`
-                                : "https://via.placeholder.com/200"
-                            }
-                            alt={product.name}
-                            className="expandable-product-img"
-                          />
-                        </div>
-                      </div>
+            ) : (
+              filteredProducts.map((product) => (
+                <React.Fragment key={product.id}>
+                  <tr
+                    className="admin-product-row"
+                    onClick={() =>
+                      setExpandedRow(
+                        expandedRow === product.id ? null : product.id
+                      )
+                    }
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>
+                      <img
+                        src={
+                          product.image
+                            ? `http://localhost:8000/storage/${product.image}`
+                            : "https://via.placeholder.com/60"
+                        }
+                        alt={product.name}
+                        className="admin-product-img"
+                      />
+                    </td>
+                    <td>{product.name}</td>
+                    <td>{product.category}</td>
+                    <td>₱{product.price}</td>
+                    <td>{product.stock}</td>
+                    <td>
+                      <button
+                        className="admin-edit-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpenForm(product);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="admin-delete-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(product.id);
+                        }}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
-                )}
-              </React.Fragment>
-            ))}
+
+                  {expandedRow === product.id && (
+                    <tr className="admin-expandable-row">
+                      <td colSpan={6}>
+                        <div className="expandable-content">
+                          <p>
+                            <strong>Description:</strong> {product.description}
+                          </p>
+                          <div className="expandable-image-wrapper">
+                            <img
+                              src={
+                                product.image
+                                  ? `http://localhost:8000/storage/${product.image}`
+                                  : "https://via.placeholder.com/200"
+                              }
+                              alt={product.name}
+                              className="expandable-product-img"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))
+            )}
           </tbody>
         </table>
       </div>
@@ -286,12 +313,23 @@ const AdminHome = () => {
               <div className="form-grid">
                 <label>
                   Name
-                  <input type="text" name="name" value={form.name} onChange={handleInputChange} required />
+                  <input
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </label>
 
                 <label>
                   Category
-                  <select name="category" value={form.category} onChange={handleInputChange} required>
+                  <select
+                    name="category"
+                    value={form.category}
+                    onChange={handleInputChange}
+                    required
+                  >
                     <option value="">Select category</option>
                     {CATEGORY_OPTIONS.map((cat) => (
                       <option key={cat} value={cat}>
@@ -303,12 +341,26 @@ const AdminHome = () => {
 
                 <label>
                   Price
-                  <input type="number" name="price" value={form.price} onChange={handleInputChange} required min={0} />
+                  <input
+                    type="number"
+                    name="price"
+                    value={form.price}
+                    onChange={handleInputChange}
+                    required
+                    min={0}
+                  />
                 </label>
 
                 <label>
                   Stock
-                  <input type="number" name="stock" value={form.stock} onChange={handleInputChange} required min={0} />
+                  <input
+                    type="number"
+                    name="stock"
+                    value={form.stock}
+                    onChange={handleInputChange}
+                    required
+                    min={0}
+                  />
                 </label>
               </div>
 
@@ -324,10 +376,20 @@ const AdminHome = () => {
               </label>
 
               <label className="admin-dropzone">
-                <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} hidden />
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  hidden
+                />
                 <div onClick={() => fileInputRef.current.click()}>
                   {preview ? (
-                    <img src={preview} alt="Preview" className="admin-preview-img" />
+                    <img
+                      src={preview}
+                      alt="Preview"
+                      className="admin-preview-img"
+                    />
                   ) : (
                     <span>Click or drag image here to upload</span>
                   )}
@@ -337,7 +399,11 @@ const AdminHome = () => {
               {error && <div className="admin-error">{error}</div>}
 
               <div className="admin-modal-actions">
-                <button type="button" onClick={handleCloseForm} className="admin-cancel-btn">
+                <button
+                  type="button"
+                  onClick={handleCloseForm}
+                  className="admin-cancel-btn"
+                >
                   Cancel
                 </button>
                 <button type="submit" className="admin-save-btn" disabled={loading}>

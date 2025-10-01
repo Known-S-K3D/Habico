@@ -39,14 +39,25 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className={`navbar-links ${menuOpen ? "active" : ""}`}>
-        <Link to="/" className="navbar-link" onClick={() => setMenuOpen(false)}>Home</Link>
-        <Link to="/shop" className="navbar-link" onClick={() => setMenuOpen(false)}>Shop</Link>
-        <Link to="/about" className="navbar-link" onClick={() => setMenuOpen(false)}>About</Link>
-        {user?.role === "admin" && (
-          <Link to="/admin/home" className="navbar-link" onClick={() => setMenuOpen(false)}>
-            Admin Home
-          </Link>
-        )}
+        <Link to="/" className="navbar-link" onClick={() => setMenuOpen(false)}>
+          Home
+        </Link>
+        <Link
+          to="/shop"
+          className="navbar-link"
+          onClick={() => setMenuOpen(false)}
+        >
+          Shop
+        </Link>
+        <Link
+          to="/about"
+          className="navbar-link"
+          onClick={() => setMenuOpen(false)}
+        >
+          About
+        </Link>
+
+        
       </div>
 
       {/* Right Side (Cart + User) */}
@@ -82,7 +93,9 @@ const Navbar = () => {
             <div className="user-dropdown-menu">
               {user ? (
                 <>
-                  <span className="user-dropdown-name">{user.name || user.email}</span>
+                  <span className="user-dropdown-name">
+                    {user.name || user.email}
+                  </span>
                   {/* <Link
                     to="/profile"
                     className="user-dropdown-link"
@@ -90,7 +103,10 @@ const Navbar = () => {
                   >
                     Profile
                   </Link> */}
-                  <button className="user-dropdown-link logout" onClick={handleLogout}>
+                  <button
+                    className="user-dropdown-link logout"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
                 </>
@@ -115,6 +131,15 @@ const Navbar = () => {
             </div>
           )}
         </div>
+         {user?.role === "admin" && (
+                <Link
+                  to="/admin/home"
+                  className="navbar-link"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              )}
       </div>
     </nav>
   );

@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import DonationForm from './components/DonationForm';
 import Profile from "./components/Profile"
+import Story from './pages/Story';
 import { useAuth } from './context/AuthContext';
 
 function RoleRoute({ children, role }) {
@@ -42,12 +43,13 @@ export default function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/story" element={<Story />} />
         <Route path="/cart" element={<Cart />} /> {/* <-- Add this line for Cart page */}
 
         {/* Protected routes */}
         <Route
           path="/user/home"
-          element={
+          element={ 
             <RoleRoute role="user">
               <UserHome />
               <DonationForm />

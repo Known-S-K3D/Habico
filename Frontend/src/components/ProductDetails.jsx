@@ -1,88 +1,87 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getProducts } from "../api/axios";
+import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
-const STORAGE_URL = "http://127.0.0.1:8000/storage/";
+const STORAGE_URL = "http://localhost:8000/storage/";
 
-const ProductDetails = ({ onAddToCart }) => {
-  const { id } = useParams();
+const ProductCard = ({ product, onAddToCart, isLoggedIn }) => {
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const products = await getProducts();
-        const foundProduct = products.data.find((p) => p.id === parseInt(id));
-        setProduct(foundProduct);
-      } catch (error) {
-        console.error("Failed to load product:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProduct();
-  }, [id]);
-
-  const handleAddToCart = () => {
-    onAddToCart({ ...product, quantity });
-    alert(`${quantity} item(s) added to cart!`);
-  };
+  const imageSrc = product.image
+    ? `${STORAGE_URL}${product.image}`
+    : "https://via.placeholder.com/400x400?text=No+Image";
 
   const handleBuyNow = () => {
-    onAddToCart({ ...product, quantity });
-    navigate("/checkout"); // ⚠️ replace with your actual checkout route
+    if (!isLoggedIn) {
+      alert("Please log in to continue.");
+      return;
+    }
+    onAddToCart(product);
+    navigate("/checkout");
   };
 
-  if (loading) return <div className="text-center py-12">Loading...</div>;
-  if (!product) return <div className="text-center py-12">Product not found.</div>;
-
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
-      {/* 🖼️ Product Image */}
-      <div className="flex justify-center items-center">
+    <div className="flex flex-col md:flex-row bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 w-full max-w-4xl mx-auto my-6 p-6">
+      
+      {/* 📸 Product Main Image */}
+      <div className="flex flex-col items-center md:w-1/2">
         <img
-          src={product.image ? `${STORAGE_URL}${product.image}` : "https://via.placeholder.com/500x500?text=No+Image"}
+          src={imageSrc}
           alt={product.name}
-          className="w-full max-w-lg rounded-lg shadow-lg object-cover"
+          className="w-full h-80 object-cover rounded-lg shadow-md"
         />
-      </div>
 
-      {/* 📦 Product Info */}
-      <div>
-        <h1 className="text-3xl font-bold mb-4 text-gray-900">{product.name}</h1>
-        <p className="text-lg text-gray-700 mb-6 leading-relaxed">{product.story_description}</p>
-
-        <div className="text-2xl font-bold text-indigo-600 mb-6">₱{product.price}</div>
-
-        {/* 📊 Quantity Selector */}
-        <div className="flex items-center mb-8">
-          <label className="mr-3 font-semibold text-gray-800">Quantity:</label>
-          <input
-            type="number"
-            min="1"
-            value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value)))}
-            className="border border-gray-300 rounded-lg w-20 text-center py-2"
+        {/* 📷 Extra Images (optional thumbnails) */}
+        <div className="flex gap-3 mt-4">
+          <img
+            src={imageSrc}
+            alt="thumb1"
+            className="w-20 h-20 object-cover rounded-md border"
+          />
+          <img
+            src={imageSrc}
+            alt="thumb2"
+            className="w-20 h-20 object-cover rounded-md border"
           />
         </div>
+      </div>
 
-        {/* 🛒 Actions */}
-        <div className="flex gap-4">
+      {/* 📋 Product Info */}
+      <div className="md:w-1/2 flex flex-col justify-between p-6">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">{product.name}</h2>
+          <p className="text-gray-700 leading-relaxed mb-5">
+            {product.story_description || product.description}
+          </p>
+          <div className="text-3xl font-semibold text-indigo-600 mb-4">
+            ₱{product.price}
+          </div>
+        </div>
+
+        {/* 🛒 Action Buttons */}
+        <div className="flex gap-4 mt-6">
           <button
-            onClick={handleAddToCart}
-            className="flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
+            className={`flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition ${
+              !isLoggedIn ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={() => isLoggedIn && onAddToCart(product)}
+            disabled={!isLoggedIn}
           >
-            <FiShoppingCart size={20} /> Add to Cart
+            <FiShoppingCart size={20} />
+            Add to Cart
           </button>
+
           <button
             onClick={handleBuyNow}
             className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
           >
             Buy Now
+          </button>
+
+          <button
+            onClick={() => navigate(`/product/${product.id}`)}
+            className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition"
+          >
+            View Story
           </button>
         </div>
       </div>
@@ -90,4 +89,4 @@ const ProductDetails = ({ onAddToCart }) => {
   );
 };
 
-export default ProductDetails;
+export default ProductCard;

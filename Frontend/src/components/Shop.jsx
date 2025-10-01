@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchProducts } from "../api/product";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import "../styles/global.css";
+import "../styles/Shop.css";
 
 const CATEGORY_OPTIONS = ["All", "Inabel", "Ikat", "Kalinga"];
 const PRICE_RANGES = [
@@ -62,10 +62,14 @@ const Shop = () => {
   // Filtered products
   const filteredProducts = Array.isArray(products)
     ? products.filter((p) => {
-        const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+        const matchesSearch = p.name
+          .toLowerCase()
+          .includes(search.toLowerCase());
         const matchesCategory = category === "All" || p.category === category;
         const range = PRICE_RANGES.find((r) => r.label === priceRange);
-        const matchesPrice = range ? p.price >= range.min && p.price <= range.max : true;
+        const matchesPrice = range
+          ? p.price >= range.min && p.price <= range.max
+          : true;
         return matchesSearch && matchesCategory && matchesPrice;
       })
     : [];
@@ -76,7 +80,6 @@ const Shop = () => {
 
       {/* Search + Filters */}
       <div className="shop-filters">
-        
         <input
           type="text"
           placeholder="Search products..."
@@ -85,19 +88,20 @@ const Shop = () => {
           className="shop-search"
         />
 
-         <h1 className="shop-title">Filters</h1>
+        <h1 className="shop-title">Filters</h1>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           className="shop-select"
         >
-          
           {CATEGORY_OPTIONS.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
           ))}
         </select>
 
-         <h1 className="shop-title">Price Range</h1>
+        <h1 className="shop-title">Price Range</h1>
         <select
           value={priceRange}
           onChange={(e) => setPriceRange(e.target.value)}
@@ -111,11 +115,7 @@ const Shop = () => {
         </select>
       </div>
 
-      {message && (
-        <div className="shop-message-card">
-          {message}
-        </div>
-      )}
+      {message && <div className="shop-message-card">{message}</div>}
       {loading && <div className="shop-message">Loading products...</div>}
 
       {/* Products Grid */}
@@ -154,23 +154,56 @@ const Shop = () => {
       {/* Modal */}
       {selected && (
         <div className="shop-modal-bg" onClick={() => setSelected(null)}>
-          <div className="shop-modal" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={
-                selected.image
-                  ? `http://localhost:8000/storage/${selected.image}`
-                  : "https://via.placeholder.com/300x300?text=No+Image"
-              }
-              alt={selected.name}
-              className="shop-modal-img"
-            />
-            <div className="shop-modal-content">
+          <div
+            className="shop-modal-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              className="shop-modal-close"
+              onClick={() => setSelected(null)}
+            >
+              &times;
+            </button>
+
+            {/* Left Section: Images */}
+            <div className="shop-modal-left">
+              <img
+                src={
+                  selected.image
+                    ? `http://localhost:8000/storage/${selected.image}`
+                    : "https://via.placeholder.com/420x420?text=No+Image"
+                }
+                alt={selected.name}
+                className="shop-modal-main-img"
+              />
+
+              <div className="shop-modal-thumbnails">
+                {selected?.gallery?.length > 0 ? (
+                  selected.gallery.map((thumb, i) => (
+                    <img
+                      key={i}
+                      src={`http://localhost:8000/storage/${thumb}`}
+                      alt={`Thumbnail ${i + 1}`}
+                      className="shop-modal-thumb"
+                    />
+                  ))
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+
+            {/* Right Section: Product Details */}
+            <div className="shop-modal-right">
               <h2 className="shop-modal-title">{selected.name}</h2>
               <div className="shop-modal-price">₱{selected.price}</div>
               <div className="shop-modal-stock">
                 Stock: {selected.stock > 0 ? selected.stock : "Out of stock"}
               </div>
-              <div className="shop-modal-desc">{selected.description}</div>
+
+              <p className="shop-modal-desc">{selected.description}</p>
+
               <div className="shop-modal-qty">
                 <label>
                   Quantity:
@@ -180,12 +213,18 @@ const Shop = () => {
                     max={selected.stock}
                     value={quantity}
                     onChange={(e) =>
-                      setQuantity(Math.max(1, Math.min(selected.stock, Number(e.target.value))))
+                      setQuantity(
+                        Math.max(
+                          1,
+                          Math.min(selected.stock, Number(e.target.value))
+                        )
+                      )
                     }
                     className="shop-modal-qty-input"
                   />
                 </label>
               </div>
+
               <div className="shop-modal-actions">
                 <button
                   className="shop-btn"
@@ -194,6 +233,7 @@ const Shop = () => {
                 >
                   Add to Cart
                 </button>
+
                 <button
                   className="shop-btn buy"
                   disabled={selected.stock < 1}
@@ -201,8 +241,15 @@ const Shop = () => {
                 >
                   Buy Now
                 </button>
-                <button className="shop-btn cancel" onClick={() => setSelected(null)}>
-                  Cancel
+
+                <button
+                  className="shop-btn cancel"
+                  onClick={() => {
+                    setSelected(null);
+                    window.location.href = `/story?category=${selected.category.toLowerCase()}`;
+                  }}
+                >
+                  View Story
                 </button>
               </div>
             </div>
