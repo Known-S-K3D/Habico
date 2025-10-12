@@ -1,0 +1,7 @@
+import { createContext } from "react";
+
+// Export only the context value from this file (no components) to keep
+// fast-refresh working in component files.
+export const CartContext = createContext(null);
+
+export default CartContext;

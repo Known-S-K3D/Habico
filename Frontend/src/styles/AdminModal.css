@@ -1,0 +1,195 @@
+/* Modal background overlay */
+.admin-modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6); /* darker overlay for contrast */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Modal container */
+.admin-modal {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 640px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  max-height: 90vh;
+  animation: slideIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Modal header */
+.admin-modal h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+/* Form layout */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Grid for main inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+/* Inputs */
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  margin-top: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  background-color: #f9fafb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+  background-color: #fff;
+}
+
+/* Dropzone styling */
+.admin-dropzone {
+  border: 2px dashed #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.admin-dropzone:hover {
+  border-color: #4f46e5;
+}
+
+.admin-preview-img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Error message */
+.admin-error {
+  color: #b91c1c;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+/* Actions buttons */
+.admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.admin-cancel-btn,
+.admin-save-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-cancel-btn {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.admin-cancel-btn:hover {
+  background-color: #d1d5db;
+}
+
+.admin-save-btn {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+.admin-save-btn:hover:enabled {
+  background-color: #4338ca;
+}
+
+.admin-save-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-modal {
+    padding: 1.5rem;
+  }
+
+  .admin-modal h2 {
+    font-size: 1.25rem;
+  }
+}
+@supports not ((-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0))) {
+  .admin-modal-bg {
+    background: rgba(17, 24, 39, 0.72); /* slightly stronger fallback when blur isn't available */
+  }
+}

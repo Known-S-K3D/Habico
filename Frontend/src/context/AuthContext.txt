@@ -1,0 +1,81 @@
+
+// src/context/AuthContext.jsx
+import React, { createContext, useEffect, useState } from "react";
+import api from "../api/axios"; // your configured axios instance (optional)
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+	const [user, setUser] = useState(null);
+
+	// Load user and token from storage on startup
+	useEffect(() => {
+		try {
+			const storedUser = localStorage.getItem("user");
+			const storedToken = localStorage.getItem("token");
+			if (storedUser) setUser(JSON.parse(storedUser));
+			if (storedToken && api && api.defaults) {
+				api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
+			}
+		} catch (e) {
+			console.warn("Failed to load auth from storage", e);
+		}
+	}, []);
+
+	// Login: call API, store token and user
+	const login = async (credentials) => {
+		try {
+			const response = await api.post("/login", credentials);
+			const { user: resUser, token } = response.data;
+
+			setUser(resUser);
+			localStorage.setItem("user", JSON.stringify(resUser));
+			localStorage.setItem("token", token);
+			if (api && api.defaults) api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+			return { ok: true, user: resUser };
+		} catch (error) {
+			return { ok: false, error: error.response?.data?.message || "Login failed" };
+		}
+	};
+
+	// Register: call API, store token and user
+	const register = async (userData) => {
+		try {
+			const response = await api.post("/register", userData);
+			const { user: resUser, token } = response.data;
+
+			setUser(resUser);
+			localStorage.setItem("user", JSON.stringify(resUser));
+			localStorage.setItem("token", token);
+			if (api && api.defaults) api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+			return { ok: true, user: resUser };
+		} catch (error) {
+			return { ok: false, error: error.response?.data?.message || "Registration failed" };
+		}
+	};
+
+	// Logout: call API (best-effort) then clear storage
+	const logout = async () => {
+		try {
+			if (api) await api.post("/logout");
+		} catch (e) {
+			// ignore errors from logout endpoint
+			console.warn("Logout request failed:", e?.message || e);
+		}
+		setUser(null);
+		localStorage.removeItem("user");
+		localStorage.removeItem("token");
+		if (api && api.defaults) delete api.defaults.headers.common["Authorization"];
+	};
+
+	return (
+		<AuthContext.Provider value={{ user, setUser, login, register, logout }}>
+			{children}
+		</AuthContext.Provider>
+	);
+};
+
+
+export default AuthContext;
